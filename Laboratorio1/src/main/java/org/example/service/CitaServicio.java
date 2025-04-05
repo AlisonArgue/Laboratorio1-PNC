@@ -127,6 +127,8 @@ public class CitaServicio {
         System.out.println("3. Fecha");
         System.out.println("4. Código de Doctor");
         System.out.println("5. Mostrar todas las citas");
+        System.out.println("6. Marcar llegada del paciente");
+        System.out.println("7. Eliminar cita");
         int opcion = sc.nextInt();
         sc.nextLine();
 
@@ -151,6 +153,12 @@ public class CitaServicio {
                 break;
             case 5:
                 mostrarCitas(citas);
+                break;
+            case 6:
+                marcarLlegada();
+                break;
+            case 7:
+                eliminarCita();
                 break;
             default:
                 System.out.println("Opción inválida.");
@@ -181,12 +189,15 @@ public class CitaServicio {
         if (citas.isEmpty()) {
             System.out.println("No se encontraron citas.");
         } else {
+            int index = 1;
             for (Cita cita : citas) {
-                System.out.println("Paciente: " + cita.getPaciente().getNombre() + " " + cita.getPaciente().getApellido() +
+                System.out.println(index + ". Paciente: " + cita.getPaciente().getNombre() + " " + cita.getPaciente().getApellido() +
                         ", Doctor: " + cita.getDoctor().getNombre() + " " + cita.getDoctor().getApellido() +
                         ", Especialidad: " + cita.getDoctor().getEspecialidad() +
                         ", Fecha: " + cita.getFecha() +
-                        ", Hora: " + cita.getHora());
+                        ", Hora: " + cita.getHora() +
+                        ", Estado: " + cita.getEstado());
+                index++;
             }
         }
     }
@@ -198,5 +209,62 @@ public class CitaServicio {
                 .filter(cita -> cita.getDoctor().getCodigo().equalsIgnoreCase(codigoDoctor))
                 .collect(Collectors.toList());
         mostrarCitas(citasFiltradas);
+    }
+
+    private void marcarLlegada() {
+        System.out.println("Ingrese el nombre del paciente:");
+        String nombrePaciente = sc.nextLine();
+        List<Cita> citasFiltradas = citas.stream()
+                .filter(cita -> cita.getPaciente().getNombre().equalsIgnoreCase(nombrePaciente))
+                .collect(Collectors.toList());
+        if (citasFiltradas.isEmpty()) {
+            System.out.println("No se encontraron citas para el paciente.");
+            return;
+        }
+        mostrarCitas(citasFiltradas);
+        System.out.println("Seleccione la cita a marcar (número):");
+        int index = sc.nextInt() - 1;
+        sc.nextLine();
+        if (index >= 0 && index < citasFiltradas.size()) {
+            System.out.println("Seleccione el estado de la cita:");
+            System.out.println("1. Llegó");
+            System.out.println("2. No llegó");
+            int estadoOpcion = sc.nextInt();
+            sc.nextLine();
+            if (estadoOpcion == 1) {
+                citasFiltradas.get(index).setEstado("llegó");
+            } else if (estadoOpcion == 2) {
+                citasFiltradas.get(index).setEstado("no llegó");
+            } else {
+                System.out.println("Opción inválida.");
+                return;
+            }
+            System.out.println("Estado de la cita actualizado.");
+        } else {
+            System.out.println("Selección inválida.");
+        }
+    }
+
+
+    private void eliminarCita() {
+        System.out.println("Ingrese el nombre del paciente:");
+        String nombrePaciente = sc.nextLine();
+        List<Cita> citasFiltradas = citas.stream()
+                .filter(cita -> cita.getPaciente().getNombre().equalsIgnoreCase(nombrePaciente))
+                .collect(Collectors.toList());
+        if (citasFiltradas.isEmpty()) {
+            System.out.println("No se encontraron citas para el paciente.");
+            return;
+        }
+        mostrarCitas(citasFiltradas);
+        System.out.println("Seleccione la cita a eliminar (número):");
+        int index = sc.nextInt() - 1;
+        sc.nextLine();
+        if (index >= 0 && index < citasFiltradas.size()) {
+            citas.remove(citasFiltradas.get(index));
+            System.out.println("Cita eliminada.");
+        } else {
+            System.out.println("Selección inválida.");
+        }
     }
 }
