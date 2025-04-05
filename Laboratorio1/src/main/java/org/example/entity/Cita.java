@@ -3,12 +3,14 @@ package org.example.entity;
 public class Cita {
     private Persona paciente;
     private Doctor doctor;
-    private String fechaHora;
+    private String fecha;
+    private String hora;
 
-    public Cita(Persona paciente, Doctor doctor, String fechaHora) {
+    public Cita(Persona paciente, Doctor doctor, String fecha, String hora) {
         this.paciente = paciente;
         this.doctor = doctor;
-        this.fechaHora = fechaHora;
+        this.fecha = fecha;
+        this.hora = hora;
     }
 
     public Persona getPaciente() {
@@ -19,24 +21,21 @@ public class Cita {
         return doctor;
     }
 
-    public String getFechaHora() {
-        return fechaHora;
+    public String getFecha() {
+        return fecha;
     }
 
-    public String getEspecialidad() {
-        return doctor.getEspecialidad();
+    public String getHora() {
+        return hora;
     }
 
-    public void setPaciente(Persona paciente) {
-        this.paciente = paciente;
+    @Override
+    public String toString() {
+        return "Cita{" +
+                "paciente=" + paciente.getNombre() + " " + paciente.getApellido() +
+                ", doctor=" + doctor.getNombre() + " " + doctor.getApellido() +
+                ", fecha='" + fecha + '\'' +
+                ", hora='" + hora + '\'' +
+                '}';
     }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public void setFechaHora(String fechaHora) {
-        this.fechaHora = fechaHora;
-    }
-
 }

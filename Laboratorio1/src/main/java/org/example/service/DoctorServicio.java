@@ -1,3 +1,4 @@
+// DoctorServicio.java
 package org.example.service;
 
 import org.example.entity.Doctor;
@@ -9,6 +10,16 @@ public class DoctorServicio {
 
     private Collection<Doctor> doctores = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
+
+    public DoctorServicio() {
+        inicializarDoctores();
+    }
+
+    private void inicializarDoctores() {
+        doctores.add(new Doctor("Juan", "Perez", "12345678-9", "1/1/1980", "1/1/2010", "Cardiología", "ZNH-1A1-MD-B2"));
+        doctores.add(new Doctor("Ana", "Gomez", "98765432-1", "2/2/1985", "2/2/2015", "Pediatría", "ZNH-2B2-MD-C3"));
+        doctores.add(new Doctor("Luis", "Martinez", "11223344-5", "3/3/1990", "3/3/2020", "Dermatología", "ZNH-3C3-MD-D4"));
+    }
 
     public void insertarDoctor() {
         System.out.println("Nombre: ");
@@ -43,9 +54,9 @@ public class DoctorServicio {
         String codigo = CodigoGenerator.generarCodigoDoctor();
         System.out.println("Codigo: " + codigo);
 
-        doctores.add(new Doctor(nombre, apellido, DUI, cumpleaños, reclutamiento, especialidad));
+        Doctor nuevoDoctor = new Doctor(nombre, apellido, DUI, cumpleaños, reclutamiento, especialidad, codigo);
+        doctores.add(nuevoDoctor);
         System.out.println("Doctor agregado exitosamente.\n");
-
     }
 
     public void mostrarDoctores() {
@@ -64,5 +75,4 @@ public class DoctorServicio {
     public Collection<Doctor> getDoctores() {
         return doctores;
     }
-
 }
