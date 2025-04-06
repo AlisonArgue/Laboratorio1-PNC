@@ -4,7 +4,6 @@ import javax.swing.*;
 
 public class BotonRandom {
     public static void mostrarVentana() {
-
         JFrame frame = new JFrame("Ventanita");
         JButton boton = new JButton("Mundo Salva Vidas");
 

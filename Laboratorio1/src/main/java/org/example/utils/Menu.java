@@ -4,7 +4,6 @@ package org.example.utils;
 import org.example.service.DoctorServicio;
 import org.example.service.PacienteServicio;
 import org.example.service.CitaServicio;
-import org.example.entity.Cita;
 import org.example.utils.BotonRandom;
 
 import java.util.Scanner;
@@ -68,6 +67,6 @@ public class Menu {
                     System.out.println("Opción inválida. Intente nuevamente.");
                     break;
             }
-        } while (num != 7);
+        } while (num != 8);
     }
 }
