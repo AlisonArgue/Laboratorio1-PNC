@@ -128,7 +128,8 @@ public class CitaServicio {
         System.out.println("4. Código de Doctor");
         System.out.println("5. Mostrar todas las citas");
         System.out.println("6. Marcar llegada del paciente");
-        System.out.println("7. Eliminar cita");
+        System.out.println("7. Marcar si llevó galletas");
+        System.out.println("8. Eliminar cita");
         int opcion = sc.nextInt();
         sc.nextLine();
 
@@ -158,6 +159,9 @@ public class CitaServicio {
                 marcarLlegada();
                 break;
             case 7:
+                marcarGalletas();
+                break;
+            case 8:
                 eliminarCita();
                 break;
             default:
@@ -196,7 +200,8 @@ public class CitaServicio {
                         ", Especialidad: " + cita.getDoctor().getEspecialidad() +
                         ", Fecha: " + cita.getFecha() +
                         ", Hora: " + cita.getHora() +
-                        ", Estado: " + cita.getEstado());
+                        ", Estado: " + cita.getEstado() +
+                        ", Galletas: " + cita.getGalletas());
                 index++;
             }
         }
@@ -263,6 +268,38 @@ public class CitaServicio {
         if (index >= 0 && index < citasFiltradas.size()) {
             citas.remove(citasFiltradas.get(index));
             System.out.println("Cita eliminada.");
+        } else {
+            System.out.println("Selección inválida.");
+        }
+    }
+
+    private void marcarGalletas() {
+        System.out.println("Ingrese el nombre del paciente:");
+        String nombrePaciente = sc.nextLine();
+        List<Cita> citasFiltradas = citas.stream()
+                .filter(cita -> cita.getPaciente().getNombre().equalsIgnoreCase(nombrePaciente))
+                .collect(Collectors.toList());
+        if (citasFiltradas.isEmpty()) {
+            System.out.println("No se encontraron citas para el paciente.");
+            return;
+        }
+        mostrarCitas(citasFiltradas);
+        System.out.println("Seleccione la cita a marcar (número):");
+        int index = sc.nextInt() - 1;
+        sc.nextLine();
+        if (index >= 0 && index < citasFiltradas.size()) {
+            System.out.println("Seleccione si llevo galletas o no (1 para sí, 2 para no):");
+            int estadoOpcion = sc.nextInt();
+            sc.nextLine();
+            if (estadoOpcion == 1) {
+                citasFiltradas.get(index).setGalletas("Sí llevó galletas");
+            } else if (estadoOpcion == 2) {
+                citasFiltradas.get(index).setGalletas("No llevó galletas");
+            } else {
+                System.out.println("Opción inválida.");
+                return;
+            }
+            System.out.println("Cita actualizada correctamente.");
         } else {
             System.out.println("Selección inválida.");
         }

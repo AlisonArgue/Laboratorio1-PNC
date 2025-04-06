@@ -6,6 +6,7 @@ public class Cita {
     private String fecha;
     private String hora;
     private String estado;
+    private String galletas;
 
     public Cita(Persona paciente, Doctor doctor, String fecha, String hora) {
         this.paciente = paciente;
@@ -13,6 +14,7 @@ public class Cita {
         this.fecha = fecha;
         this.hora = hora;
         this.estado = "pendiente";
+        this.galletas = "pendiente";
     }
 
     public Persona getPaciente() {
@@ -35,6 +37,15 @@ public class Cita {
         return estado;
     }
 
+    public String getGalletas() {
+        return galletas;
+    }
+
+    public void setGalletas(String galletas) {
+        this.galletas = galletas;
+    }
+
+
     public void setEstado(String estado) {
         this.estado = estado;
     }
@@ -47,6 +58,7 @@ public class Cita {
                 ", fecha='" + fecha + '\'' +
                 ", hora='" + hora + '\'' +
                 ", estado='" + estado + '\'' +
+                ", galletas= " + galletas + '\'' +
                 '}';
     }
 }

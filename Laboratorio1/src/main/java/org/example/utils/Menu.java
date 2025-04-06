@@ -5,6 +5,7 @@ import org.example.service.DoctorServicio;
 import org.example.service.PacienteServicio;
 import org.example.service.CitaServicio;
 import org.example.entity.Cita;
+import org.example.utils.BotonRandom;
 
 import java.util.Scanner;
 
@@ -16,6 +17,7 @@ public class Menu {
     PacienteServicio pacienteServicio = new PacienteServicio();
     DoctorServicio doctorServicio = new DoctorServicio();
     CitaServicio citaServicio = new CitaServicio(pacienteServicio.getPacientes(), doctorServicio.getDoctores());
+    BotonRandom botonRandom = new BotonRandom();
 
     // Menu de opciones para el usuario
     public void showMenu() {
@@ -27,7 +29,8 @@ public class Menu {
             System.out.println("4. Buscador de citas");
             System.out.println("5. Mostrar listado completo de pacientes");
             System.out.println("6. Mostrar listado completo de doctores");
-            System.out.println("7. Salir");
+            System.out.println("7. Botón random del doctor");
+            System.out.println("8. Salir");
             System.out.println("Ingrese una opcion: ");
             num = sc.nextInt();
 
@@ -56,6 +59,9 @@ public class Menu {
                     doctorServicio.mostrarDoctores();
                     break;
                 case 7:
+                    botonRandom.mostrarVentana();
+                    break;
+                case 8:
                     System.out.println("Saliendo del sistema...");
                     break;
                 default:
