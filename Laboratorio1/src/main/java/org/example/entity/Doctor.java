@@ -15,10 +15,10 @@ public class Doctor extends Persona {
     private String codigo;
 
     public Doctor(String nombre, String apellido, String DUI, String cumpleaños,
-                  String fechaReclutamiento, String especialidad) {
+                  String fechaReclutamiento, String especialidad, String codigo) {
         super(nombre, apellido, DUI, cumpleaños);
         this.especialidad = especialidad;
-        this.codigo = CodigoGenerator.generarCodigoDoctor();
+        this.codigo = codigo;
 
         try {
             this.fechaReclutamiento = LocalDate.parse(fechaReclutamiento, fmt);

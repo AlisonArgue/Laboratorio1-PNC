@@ -1,3 +1,4 @@
+// Menu.java
 package org.example.utils;
 
 import org.example.service.DoctorServicio;
@@ -11,19 +12,19 @@ public class Menu {
     Scanner sc = new Scanner(System.in);
     int num;
 
-    //Crear instancias para ocupar las funciones
+    // Crear instancias para ocupar las funciones
     PacienteServicio pacienteServicio = new PacienteServicio();
     DoctorServicio doctorServicio = new DoctorServicio();
     CitaServicio citaServicio = new CitaServicio(pacienteServicio.getPacientes(), doctorServicio.getDoctores());
 
-    //Menu de opciones para el usuario
+    // Menu de opciones para el usuario
     public void showMenu() {
         do {
             System.out.println("Mundo Salva Vidas >:D");
             System.out.println("1. Agregar Doctor");
             System.out.println("2. Agregar Paciente");
             System.out.println("3. Agendar Cita");
-            System.out.println("4. Buscador");
+            System.out.println("4. Buscador de citas");
             System.out.println("5. Mostrar listado completo de pacientes");
             System.out.println("6. Mostrar listado completo de doctores");
             System.out.println("7. Salir");
@@ -34,6 +35,7 @@ public class Menu {
                 case 1:
                     System.out.println("\nIngresar datos del Doctor");
                     doctorServicio.insertarDoctor();
+                    citaServicio.actualizarDoctores(doctorServicio.getDoctores());
                     break;
                 case 2:
                     System.out.println("\nIngresar datos del Paciente");
@@ -44,7 +46,8 @@ public class Menu {
                     citaServicio.agendarCita();
                     break;
                 case 4:
-                    System.out.println("\nBuscar");
+                    citaServicio.buscarCitas();
+                    System.out.println("\nBuscar citas");
                     break;
                 case 5:
                     pacienteServicio.mostrarPacientes();

@@ -5,8 +5,18 @@ import java.util.*;
 import org.example.entity.Persona;
 
 public class PacienteServicio {
-    private  Collection<Persona> pacientes = new ArrayList<>();
-    private  Scanner sc = new Scanner(System.in);
+    private Collection<Persona> pacientes = new ArrayList<>();
+    private Scanner sc = new Scanner(System.in);
+
+    public PacienteServicio() {
+        inicializarPacientes();
+    }
+
+    private void inicializarPacientes() {
+        pacientes.add(new Persona("Carlos", "Lopez", "12345678-9", "1/1/2000"));
+        pacientes.add(new Persona("Maria", "Hernandez", "98765432-1", "2/2/1995"));
+        pacientes.add(new Persona("Jose", "Martinez", "11223344-5", "3/3/1980"));
+    }
 
     public int calcularEdad(Persona persona) {
         LocalDate cumpleaños = persona.getCumpleaños();
